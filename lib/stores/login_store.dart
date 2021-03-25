@@ -22,4 +22,14 @@ abstract class _LoginStore with Store {
 
   @action
   void setPassword(String value) => password = value;
+
+  @computed
+  bool get isEmailValid => email.length >= 6;
+  // TODO: add email regex validation - RegExp(expression).hasMatch(email)
+
+  @computed
+  bool get isPasswordValid => password.length >= 6;
+
+  @computed
+  bool get isFormValid => isEmailValid && isPasswordValid;
 }
