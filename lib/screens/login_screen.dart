@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:todomobx/stores/login_store.dart';
 import 'package:todomobx/widgets/custom_icon_button.dart';
 import 'package:todomobx/widgets/custom_text_field.dart';
 
 import 'list_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  LoginStore loginStore = LoginStore();
 
   @override
   Widget build(BuildContext context) {
@@ -33,29 +34,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       hint: 'E-mail',
                       prefix: Icon(Icons.account_circle),
                       textInputType: TextInputType.emailAddress,
-                      onChanged: (email){
-
-                      },
+                      onChanged: loginStore.setEmail,
                       enabled: true,
                     ),
-                    const SizedBox(height: 16,),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     CustomTextField(
                       hint: 'Senha',
                       prefix: Icon(Icons.lock),
                       obscure: true,
-                      onChanged: (pass){
-
-                      },
+                      onChanged: loginStore.setPassword,
                       enabled: true,
                       suffix: CustomIconButton(
                         radius: 32,
                         iconData: Icons.visibility,
-                        onTap: (){
-
-                        },
+                        onTap: () {},
                       ),
                     ),
-                    const SizedBox(height: 16,),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     SizedBox(
                       height: 44,
                       child: RaisedButton(
@@ -64,19 +63,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: Text('Login'),
                         color: Theme.of(context).primaryColor,
-                        disabledColor: Theme.of(context).primaryColor.withAlpha(100),
+                        disabledColor:
+                            Theme.of(context).primaryColor.withAlpha(100),
                         textColor: Colors.white,
-                        onPressed: (){
+                        onPressed: () {
                           Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context)=>ListScreen())
-                          );
+                              MaterialPageRoute(
+                                  builder: (context) => ListScreen()));
                         },
                       ),
                     )
                   ],
                 ),
-              )
-          ),
+              )),
         ),
       ),
     );
