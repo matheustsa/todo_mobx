@@ -11,7 +11,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.deepPurpleAccent,
-        cursorColor: Colors.deepPurpleAccent,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Colors.deepPurpleAccent,
+          selectionColor: Colors.deepPurpleAccent,
+          selectionHandleColor: Colors.deepPurpleAccent,
+        ),
         scaffoldBackgroundColor: Colors.deepPurpleAccent,
       ),
       home: LoginScreen(),
