@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:todomobx/screens/list_screen.dart';
 import 'package:todomobx/stores/login_store.dart';
 import 'package:todomobx/widgets/custom_icon_button.dart';
 import 'package:todomobx/widgets/custom_text_field.dart';
@@ -64,7 +63,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 44,
                         width: 120,
                         child: ElevatedButton(
-                          child: Text('Login'),
+                          child: loginStore.loading
+                              ? CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.white),
+                                )
+                              : Text('Login'),
                           style: ElevatedButton.styleFrom(
                             primary: Theme.of(context).primaryColor,
                             textStyle: TextStyle(color: Colors.white),
@@ -74,9 +78,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           onPressed: loginStore.isFormValid
                               ? () {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) => ListScreen()));
+                                  loginStore.login();
+                                  // Navigator.of(context).pushReplacement(
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => ListScreen()));
                                 }
                               : null,
                         ),

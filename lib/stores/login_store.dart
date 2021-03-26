@@ -5,11 +5,11 @@ part 'login_store.g.dart';
 class LoginStore = _LoginStore with _$LoginStore;
 
 abstract class _LoginStore with Store {
-  // _LoginStore(){
-  //   autorun((_){
-  //
-  //   });
-  // }
+  _LoginStore() {
+    autorun((_) {
+      print(loading ? "processando login..." : "logado!");
+    });
+  }
 
   @observable
   String email = "";
@@ -28,6 +28,16 @@ abstract class _LoginStore with Store {
 
   @action
   void togglePasswordVisibility() => passwordVisible = !passwordVisible;
+
+  @observable
+  bool loading = false;
+
+  @action
+  Future<void> login() async {
+    loading = true;
+    await Future.delayed(Duration(seconds: 2));
+    loading = false;
+  }
 
   @computed
   bool get isEmailValid => email.length >= 6;
