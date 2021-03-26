@@ -5,11 +5,11 @@ part 'login_store.g.dart';
 class LoginStore = _LoginStore with _$LoginStore;
 
 abstract class _LoginStore with Store {
-  _LoginStore() {
-    autorun((_) {
-      print(loading ? "processando login..." : "logado!");
-    });
-  }
+  // _LoginStore() {
+  //   autorun((_) {
+  //     print(loggedIn ? "processando login..." : "logado!");
+  //   });
+  // }
 
   @observable
   String email = "";
@@ -32,11 +32,15 @@ abstract class _LoginStore with Store {
   @observable
   bool loading = false;
 
+  @observable
+  bool loggedIn = false;
+
   @action
   Future<void> login() async {
     loading = true;
     await Future.delayed(Duration(seconds: 2));
     loading = false;
+    loggedIn = true;
   }
 
   @computed
@@ -48,4 +52,7 @@ abstract class _LoginStore with Store {
 
   @computed
   bool get isFormValid => isEmailValid && isPasswordValid;
+
+  @computed
+  Function get loginPressed => (isFormValid && !loading) ? login : null;
 }
