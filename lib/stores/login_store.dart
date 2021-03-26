@@ -23,6 +23,12 @@ abstract class _LoginStore with Store {
   @action
   void setPassword(String value) => password = value;
 
+  @observable
+  bool passwordVisible = false;
+
+  @action
+  void togglePasswordVisibility() => passwordVisible = !passwordVisible;
+
   @computed
   bool get isEmailValid => email.length >= 6;
   // TODO: add email regex validation - RegExp(expression).hasMatch(email)
