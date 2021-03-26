@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 16,
                     ),
                     CustomTextField(
-                      hint: 'Senha',
+                      hint: 'Password',
                       prefix: Icon(Icons.lock),
                       obscure: true,
                       onChanged: loginStore.setPassword,
@@ -58,15 +58,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     Observer(builder: (_) {
                       return SizedBox(
                         height: 44,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(32),
-                          ),
+                        width: 120,
+                        child: ElevatedButton(
                           child: Text('Login'),
-                          color: Theme.of(context).primaryColor,
-                          disabledColor:
-                              Theme.of(context).primaryColor.withAlpha(100),
-                          textColor: Colors.white,
+                          style: ElevatedButton.styleFrom(
+                            primary: Theme.of(context).primaryColor,
+                            textStyle: TextStyle(color: Colors.white),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32),
+                            ),
+                          ),
                           onPressed: loginStore.isFormValid
                               ? () {
                                   Navigator.of(context).pushReplacement(
