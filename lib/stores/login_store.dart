@@ -41,6 +41,14 @@ abstract class _LoginStore with Store {
     await Future.delayed(Duration(seconds: 2));
     loading = false;
     loggedIn = true;
+
+    email = "";
+    password = "";
+  }
+
+  @action
+  void logout() {
+    loggedIn = false;
   }
 
   @computed
