@@ -12,7 +12,9 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
-  ListStore listStore = ListStore();
+  final ListStore listStore = ListStore();
+
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +61,17 @@ class _ListScreenState extends State<ListScreen> {
                       children: <Widget>[
                         Observer(builder: (_) {
                           return CustomTextField(
+                            controller: textEditingController,
                             hint: 'Tarefa',
                             onChanged: listStore.setNewTodoTitle,
                             suffix: listStore.isFormValid
                                 ? CustomIconButton(
                                     radius: 32,
                                     iconData: Icons.add,
-                                    onTap: listStore.addTodo,
+                                    onTap: () {
+                                      listStore.addTodo();
+                                      textEditingController.clear();
+                                    },
                                   )
                                 : null,
                           );
@@ -78,12 +84,22 @@ class _ListScreenState extends State<ListScreen> {
                             return ListView.separated(
                               itemCount: listStore.todoList.length,
                               itemBuilder: (_, index) {
-                                return ListTile(
-                                  title: Text(
-                                    listStore.todoList[index],
-                                  ),
-                                  onTap: () {},
-                                );
+                                final todo = listStore.todoList[index];
+                                return Observer(builder: (_) {
+                                  return ListTile(
+                                    title: Text(
+                                      todo.title,
+                                      style: TextStyle(
+                                          color: todo.done
+                                              ? Colors.grey
+                                              : Colors.black,
+                                          decoration: todo.done
+                                              ? TextDecoration.lineThrough
+                                              : null),
+                                    ),
+                                    onTap: todo.toggleDone,
+                                  );
+                                });
                               },
                               separatorBuilder: (_, __) {
                                 return Divider();

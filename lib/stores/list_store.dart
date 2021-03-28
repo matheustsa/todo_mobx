@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:todomobx/stores/todo_store.dart';
 
 part 'list_store.g.dart';
 
@@ -13,12 +14,13 @@ abstract class _ListStore with Store {
 
   // @observable
   // List<String> todoList = [];
-  ObservableList<String> todoList = ObservableList<String>();
+  ObservableList<TodoStore> todoList = ObservableList<TodoStore>();
 
   @action
   void addTodo() {
     // todoList = List.from(todoList..add(newTodoTitle));
-    todoList.add(newTodoTitle);
+    todoList.insert(0, TodoStore(newTodoTitle));
+    newTodoTitle = "";
   }
 
   @computed
