@@ -46,6 +46,7 @@ abstract class _LoginStore with Store {
   @computed
   bool get isEmailValid => email.length >= 6;
   // TODO: add email regex validation - RegExp(expression).hasMatch(email)
+  // /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
 
   @computed
   bool get isPasswordValid => password.length >= 6;
