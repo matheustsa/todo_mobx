@@ -38,3 +38,6 @@ lib/generated_plugin_registrant.dart
 
 # Generated Dart files
 **/*.g.dart
+
+# Gradle
+gradle.properties
